@@ -23,4 +23,16 @@ describe('Dialog - ', () => {
 
     await dialog.dialogOkBtn.click()
   })
+
+  it.only('Verify that the app adjusts when orientation is changed', async () => {
+    console.log(await driver.getOrientation())
+    await driver.setOrientation('LANDSCAPE')
+
+    await driver.saveScreenshot('./screenshots/landscape.png')
+    await dialog.appBtn.click()
+
+    await driver.setOrientation('PORTRAIT')
+    await driver.back()
+    await driver.saveScreenshot('./screenshots/portrait.png')
+  })
 })
