@@ -9,6 +9,12 @@
       "@wdio/selenium-standalone-service",
       "@wdio/appium-service"
     ],
-    "target": "es2019"
+    "target": "es2019",
+    "baseUrl": "./",
+    "paths": {
+      "test/*": ["./test/*"],
+      "pageobjects/*": ["./test/pageobjects/*"],
+      "specs/*": ["./specs/*"]
+    }
   }
 }

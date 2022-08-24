@@ -1,4 +1,4 @@
-import type { Options } from "@wdio/types";
+import type { Options } from '@wdio/types'
 
 export const config: Options.Testrunner = {
   //
@@ -25,13 +25,18 @@ export const config: Options.Testrunner = {
     // for all available options
     tsNodeOpts: {
       transpileOnly: true,
-      project: "test/tsconfig.json",
+      project: 'tsconfig.json',
     },
     // tsconfig-paths is only used if "tsConfigPathsOpts" are provided, if you
     // do please make sure "tsconfig-paths" is installed as dependency
-    // tsConfigPathsOpts: {
-    //     baseUrl: './'
-    // }
+    tsConfigPathsOpts: {
+      baseUrl: './',
+      paths: {
+        'test/*': ['./test/*'],
+        'pageobjects/*': ['./test/pageobjects/*'],
+        'specs/*': ['./specs/*'],
+      },
+    },
   },
   port: 4723,
   //
@@ -50,7 +55,7 @@ export const config: Options.Testrunner = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ["./test/specs/**/*.ts"],
+  specs: ['./test/specs/**/*.ts'],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -79,11 +84,11 @@ export const config: Options.Testrunner = {
   //
   capabilities: [
     {
-      platformName: "Android",
-      "appium:platformVersion": "12.0",
-      "appium:deviceName": "Pixel 5 API 31",
-      "appium:app": "assets/ApiDemos-debug.apk", // Since I'm using TS, I can pass relative URL
-      "appium:automationName": "UiAutomator2",
+      platformName: 'Android',
+      'appium:platformVersion': '12.0',
+      'appium:deviceName': 'Pixel 5 API 31',
+      'appium:app': 'assets/ApiDemos-debug.apk', // Since I'm using TS, I can pass relative URL
+      'appium:automationName': 'UiAutomator2',
     },
   ],
   //
@@ -93,7 +98,7 @@ export const config: Options.Testrunner = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "info",
+  logLevel: 'info',
   //
   // Set specific log levels per logger
   // loggers:
@@ -117,7 +122,7 @@ export const config: Options.Testrunner = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: "http://localhost",
+  baseUrl: 'http://localhost',
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -133,7 +138,7 @@ export const config: Options.Testrunner = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: ["appium"],
+  services: ['appium'],
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -141,7 +146,7 @@ export const config: Options.Testrunner = {
   //
   // Make sure you have the wdio adapter package for the specific framework installed
   // before running any tests.
-  framework: "mocha",
+  framework: 'mocha',
   //
   // The number of times to retry the entire specfile when it fails as a whole
   // specFileRetries: 1,
@@ -155,13 +160,13 @@ export const config: Options.Testrunner = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+  reporters: ['spec'],
 
   //
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
   mochaOpts: {
-    ui: "bdd",
+    ui: 'bdd',
     timeout: 60000,
   },
   //
@@ -310,4 +315,4 @@ export const config: Options.Testrunner = {
    */
   // onReload: function(oldSessionId, newSessionId) {
   // }
-};
+}
