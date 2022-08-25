@@ -24,4 +24,7 @@ export class DialogPage {
   get cancelBtn() {
     return $('//android.widget.Button[@resource-id="android:id/button2"]')
   }
+  get viewBtn() {
+    return $('//android.widget.TextView[@content-desc="Views"]')
+  }
 }

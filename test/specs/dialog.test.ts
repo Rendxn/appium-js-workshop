@@ -24,7 +24,7 @@ describe('Dialog - ', () => {
     await dialog.dialogOkBtn.click()
   })
 
-  it.only('Verify that the app adjusts when orientation is changed', async () => {
+  it('Verify that the app adjusts when orientation is changed', async () => {
     console.log(await driver.getOrientation())
     await driver.setOrientation('LANDSCAPE')
 
@@ -34,5 +34,14 @@ describe('Dialog - ', () => {
     await driver.setOrientation('PORTRAIT')
     await driver.back()
     await driver.saveScreenshot('./screenshots/portrait.png')
+  })
+
+  it('Verify scroll', async () => {
+    await dialog.viewBtn.click()
+    await driver.touchAction([
+      { action: 'press', x: 500, y: 1000 },
+      { action: 'moveTo', x: 500, y: 500 },
+      'release',
+    ])
   })
 })
