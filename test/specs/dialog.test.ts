@@ -24,7 +24,7 @@ describe('Dialog - ', () => {
     await dialog.dialogOkBtn.click()
   })
 
-  it('Verify that the app adjusts when orientation is changed', async () => {
+  it.skip('Verify that the app adjusts when orientation is changed', async () => {
     console.log(await driver.getOrientation())
     await driver.setOrientation('LANDSCAPE')
 
@@ -36,12 +36,53 @@ describe('Dialog - ', () => {
     await driver.saveScreenshot('./screenshots/portrait.png')
   })
 
-  it('Verify scroll', async () => {
+  it.skip('Verify scroll', async () => {
     await dialog.viewBtn.click()
     await driver.touchAction([
-      { action: 'press', x: 500, y: 1000 },
-      { action: 'moveTo', x: 500, y: 500 },
+      { action: 'press', x: 500, y: 1400 },
+      { action: 'moveTo', x: 500, y: 300 },
+      'release',
+      { action: 'press', x: 500, y: 1400 },
+      { action: 'moveTo', x: 500, y: 300 },
+      'release',
+      { action: 'press', x: 500, y: 1400 },
+      { action: 'moveTo', x: 500, y: 300 },
       'release',
     ])
+    await dialog.tabsBtn.click()
+    await dialog.contentByIdBtn.click()
+
+    const tabs = await dialog.tabs
+
+    for (const tab of tabs) {
+      const isEnabled = await tab.isEnabled()
+      const isSelected = await tab.isSelected()
+      const isDisplayed = await tab.isDisplayed()
+
+      console.log({ isEnabled, isSelected, isDisplayed })
+    }
+  })
+
+  it.skip('Verify timeouts', async () => {
+    // driver.setImplicitTimeout(10000)
+    // driver.setTimeouts(10000)
+    // driver.pause(10000)
+
+    await dialog.viewBtn.click()
+    // dialog.tabsBtn.click()
+  })
+
+  it.only('Verify the repeat alarm options has attribute checked when selected', async () => {
+    await dialog.appBtn.click()
+    await dialog.alertDialogBtn.click()
+    await dialog.repeatAlarmBtn.click()
+    const text = await dialog.getWeekdayByIndex(0).getText()
+    let isChecked = await dialog.getWeekdayByIndex(0).getAttribute('checked')
+    expect(text).toEqual('Every Monday')
+    expect(isChecked).toEqual('false')
+
+    await dialog.getWeekdayByIndex(0).click()
+    isChecked = await dialog.getWeekdayByIndex(0).getAttribute('checked')
+    expect(isChecked).toEqual('true')
   })
 })
